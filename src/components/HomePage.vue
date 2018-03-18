@@ -8,8 +8,8 @@
       </div>
     </div>
     <div class='footer'>
-      <a href="https://github.com/SarahAd/CreativeProject3"><img src="/static/images/githublogo.png"></a>
-      <a href="https://github.com/SarahAd/CreativeProject3">Find My Code On GitHub!</a>
+      <a href="https://github.com/SarahAd/CreativeProject4"><img src="/static/images/githublogo.png"></a>
+      <a href="https://github.com/SarahAd/CreativeProject4">Find My Code On GitHub!</a>
     </div>
   </body>
 </template>
