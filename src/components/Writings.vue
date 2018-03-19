@@ -118,7 +118,7 @@
 
 </div>
 
-<div id="app">
+<!-- <div id="app">
   <h2>Comments</h2>
     <form v-on:submit.prevent="addTicket">
       <textarea v-model="addedProblem" placeholder="Share Your Thoughts On My Poetry"></textarea>
@@ -138,7 +138,7 @@
       </div>
     </div>
   </div>
-
+ -->
   <div>
     <h2>A Hidden Well</h2>
     <h3>Creative Essay</h3>
@@ -172,7 +172,7 @@
 </div>
 
 
-<div id="app">
+<!-- <div id="app">
   <h2>Comments</h2>
     <form v-on:submit.prevent="addTicket">
       <textarea v-model="addedProblem" placeholder="Share Your Thoughts On My Essay"></textarea>
@@ -191,7 +191,7 @@
         </div>
       </div>
   </div>
-
+ -->
 </div>
 </div>
 </template>

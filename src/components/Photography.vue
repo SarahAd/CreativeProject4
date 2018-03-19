@@ -112,8 +112,8 @@
        numberOfLikesCathedral: 0,
        numberOfLikesVonniev: 0,
        addedName: '',
-       addedMessage: '',
-       comments: {},
+       addedProblem: '',
+       tickets: {},
        }
      },
   created: function() {

@@ -60,7 +60,7 @@
 <script>
  export default {
    name: 'Paintings',
-   data () {
+   data() {
      return {
        name: 'Paintings',
        imagePath: '/static/images/me.jpg',
@@ -70,6 +70,9 @@
        numberOfLikesViolin: 0,
        numberOfLikesMarble: 0,
        numberOfLikesBird: 0,
+       addedName: '',
+       addedProblem: '',
+       tickets: {},
      }
    },
    created: function() {
@@ -128,6 +131,10 @@
 
 
 <style scoped>
+p {
+  font-family: 'Bad Script', sans-serif;
+  font-size:calc(12px + 1.5vw);
+}
 h2 {
   font-size:calc(40px + 1vw);
   font-family: 'Meddon', cursive;
@@ -180,6 +187,7 @@ button {
   opacity: 0.7;
   border: none;
   background: none;
+  font-family: 'Julius Sans One', sans-serif;
 }
 button:hover {
   opacity: 1;
