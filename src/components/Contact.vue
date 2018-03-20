@@ -69,7 +69,7 @@ input {
 textarea {
   padding: 2vw;
   width: 50vw;
-  height:calc(100px + 15vw);
+  height:calc(70px + 5vw);
   font-family: 'Julius Sans One', sans-serif;
   font-size:calc(12px + 1vw);
   color: black;

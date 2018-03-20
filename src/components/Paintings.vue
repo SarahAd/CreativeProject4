@@ -1,50 +1,32 @@
 <template>
   <div class="page">
-    <h1>{{name}}</h1>
-   
-    <div class="paintings">
-      <div class="self">
-        <img src="/static/images/self.jpg">
-        <button v-on:click="likeSelf()" type="button">♥ {{ numberOfLikesSelf }}</button>
-      </div>
-      <div class="earth">
-        <img src="/static/images/earth.jpg">
-        <button v-on:click="likeEarth()" type="button">♥ {{ numberOfLikesEarth }}</button>
-      </div>
-      <div class="smoothies">
-        <img src="/static/images/smoothies.jpg">
-        <button v-on:click="likeSmoothies()" type="button">♥ {{ numberOfLikesSmoothies }}</button>
-      </div>
-      <div class="violin">
-        <img src="/static/images/violin.jpg">
-        <button v-on:click="likeViolin()" type="button">♥ {{ numberOfLikesViolin }}</button>
-      </div>
-       <div class="marble">
-        <img src="/static/images/marblev.jpg">
-        <button v-on:click="likeMarble()" type="button">♥ {{ numberOfLikesMarble }}</button>
-      </div>
-      <div class="bird">
-        <img src="/static/images/bird.jpg">
-        <button v-on:click="likeBird()" type="button">♥ {{ numberOfLikesBird }}</button>
-      </div>
-    </div>
-
+    <h1>Paintings</h1>
+    
     <div id="app">
+   
+<div class="paintings">
+  <div v-for="painting in paintings">
+    <img v-bind:src="painting.path">
+    <button v-on:click="putLike(painting)" type="button">   ♥ {{ painting.likes }}</button>
+  </div>
+</div>
+
+<!-- <button v-on:click="getPaintings()" type="button">♥</button> -->
+    
   <h2>Comments</h2>
-    <form v-on:submit.prevent="addTicket">
+    <form v-on:submit.prevent="addPaintingTicket()">
       <textarea v-model="addedProblem" placeholder="Share Your Thoughts On My Paintings"></textarea>
       <input v-model="addedName" placeholder="Name"></input>
       <button class="submit" type="submit">Submit</button>
     </form>
-      <div v-for="ticket in tickets">
+      <div v-for="paintingTicket in paintingTickets">
         <hr>
           <div class="ticket">
             <div class="problem">
-              <p>{{ticket.problem}}</p>
-              <p><i>— {{ticket.name}}</i></p>
+              <p>{{paintingTicket.problem}}  — {{paintingTicket.name}}</p>
             </div>
           <div class="delete">
-          <button v-on:click="deleteTicket(ticket)" class="delete">Delete</button>
+          <button v-on:click="deletePaintingTicket(paintingTicket)" class="delete">Delete</button><br>
         </div>
       </div>
     </div>
@@ -59,70 +41,98 @@
 
 <script>
  export default {
-   name: 'Paintings',
    data() {
      return {
-       name: 'Paintings',
-       imagePath: '/static/images/me.jpg',
-       numberOfLikesSelf: 0,
-       numberOfLikesEarth: 0,
-       numberOfLikesSmoothies: 0,
-       numberOfLikesViolin: 0,
-       numberOfLikesMarble: 0,
-       numberOfLikesBird: 0,
+      paintings: [
+          {id: 0, path: '../static/images/self.jpg', likes: 0},
+          {id: 1, path: '../static/images/earth.jpg', likes: 0},
+          {id: 2, path: '../static/images/smoothies.jpg', likes: 0},
+          {id: 3, path: '../static/images/violin.jpg', likes: 0},
+          {id: 4, path: '../static/images/marblev.jpg', likes: 0},
+          {id: 5, path: '../static/images/bird.jpg', likes: 0},
+       ],
        addedName: '',
        addedProblem: '',
-       tickets: {},
+       paintingTickets: {},
      }
    },
    created: function() {
-    this.getTickets();
+    this.getPaintingTicket();
     },
+    created: function() {
+    this.getLike();
+    },
+    // created: function() {
+    // this.getPaintings();
+    // },
     methods: {
-      getTickets: function() {
-        axios.get("http://localhost:3000/api/tickets").then(response => {
-        this.tickets = response.data;
+      getPaintingTicket: function() {
+        axios.get("/api/paintingTickets").then(response => {
+        this.paintingTickets = response.data;
         return true;
         }).catch(err => {
         });
       },
-      addTicket: function() {
-        axios.post("http://localhost:3000/api/tickets", {
+      addPaintingTicket: function() {
+        axios.post("/api/paintingTickets", {
         name: this.addedName,
         problem: this.addedProblem
         }).then(response => {
         this.addedName = "";
         this.addedProblem = "";
-        this.getTickets();
+        this.getPaintingTicket();
         return true;
         }).catch(err => {
         });
       },
-      deleteTicket: function(ticket) {
-        axios.delete("http://localhost:3000/api/tickets/" + ticket.id).then(response => {
-        this.getTickets();
+      deletePaintingTicket: function(paintingTicket) {
+        axios.delete("/api/paintingTickets/" + paintingTicket.id).then(response => {
+        this.getPaintingTicket();
         return true;
         }).catch(err => {
         });
       },
-      likeSelf: function () {
-        this.numberOfLikesSelf += 1;
-      },
-      likeEarth: function () {
-        this.numberOfLikesEarth += 1;
-      },
-      likeSmoothies: function () {
-        this.numberOfLikesSmoothies += 1;
-      },
-      likeViolin: function () {
-        this.numberOfLikesViolin += 1;
-      },
-      likeMarble: function () {
-        this.numberOfLikesMarble += 1;
-      },
-      likeBird: function () {
-        this.numberOfLikesBird += 1;
-      },
+      // getPaintings: function() {
+      //   axios.get("api/paintings/").then(response => {
+      //   this.paintings = response.data;
+      //   return true;
+      //   }).catch(err => {
+      //   });
+      // }
+    // like: function(painting) {
+    //     painting.likes += 1;
+    // },
+    getLike: function() {
+        axios.get("/api/paintings").then(response => {
+        this.paintings = response.data;
+        return true;
+      }).catch(err => {
+      });
+    },
+    putLike: function(painting) {
+      painting.likes += 1;
+        axios.put("/api/paintings/" + painting.id, {
+        likes: painting.likes,
+      }).then(response => {
+        return true;
+      }).catch(err => {
+      });
+    },
+    addLike: function() {
+      painting.likes += 1;
+        axios.post("/api/paintings", {
+        text: this.text,
+        completed: false,
+        priority: this.priority,
+        likes: painting.likes,
+      }).then(response => {
+        this.text = "";
+        this.getLike();
+        console.log("in addLike function");
+        return true;
+      }).catch(err => {
+      });
+    },
   }
 
 };
@@ -131,9 +141,18 @@
 
 
 <style scoped>
+.ticket {
+  padding-bottom: 5vw;
+}
+hr {
+    height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+}
 p {
   font-family: 'Bad Script', sans-serif;
-  font-size:calc(12px + 1.5vw);
+  font-size:calc(12px + 2vw);
+  padding: 0 10vw 0 10vw;
 }
 h2 {
   font-size:calc(40px + 1vw);
@@ -157,9 +176,9 @@ input {
 textarea {
   padding: 2vw;
   width: 50vw;
-  height:calc(80px + 10vw);
+  height:calc(70px + 5vw);
   font-family: 'Julius Sans One', sans-serif;
-  font-size:calc(12px + 1vw);
+  font-size:calc(12px + 0.9vw);
   color: black;
   font-weight: lighter;
   vertical-align: center;
@@ -203,6 +222,7 @@ button:hover {
 }
  img {
     box-shadow: 0vw 1vw 3vw black;
+    width: 30vw;
  }
 .container {
     margin: 4vw;
@@ -210,7 +230,7 @@ button:hover {
  }
  .page {
     background-color: #F0F0F0;
-    padding-bottom: 1vw;
+    padding-bottom: 3vw;
     box-shadow: 0vw 1vw 3vw black;
     margin-bottom: 0;
   }

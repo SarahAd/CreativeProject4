@@ -2,81 +2,29 @@
   <div class="page">
     <h1>{{name}}</h1>
    
-      <div class="photographs">
-        <!-- <div class="itsaboy">
-          <img src="/static/images/itsaboy.jpg">
-          <button v-on:click="like(0)" type="button">♥ {{ likes[0] }}</button>
-        </div>
-        <div class="portia">
-          <img src="/static/images/portia.jpg">
-          <button v-on:click="like(1)" type="button">♥ {{ likes[1] }}</button>
-        </div> -->
-        <div class="itsaboy">
-          <img src="/static/images/itsaboy.jpg">
-          <button v-on:click="likeItsaboy()" type="button">♥ {{ numberOfLikesItsaboy }}</button>
-        </div>
-        <div class="portia">
-          <img src="/static/images/portia.jpg">
-          <button v-on:click="likePortia()" type="button">♥ {{ numberOfLikesPortia }}</button>
-        </div>
-        <div class="christmas1">
-          <img src="/static/images/christmas1.jpg">
-          <button v-on:click="likeChristmas1()" type="button">♥ {{ numberOfLikesChristmas1 }}</button>
-        </div>
-        <div class="christmas2">
-          <img src="/static/images/christmas2.jpg">
-          <button v-on:click="likeChristmas2()" type="button">♥ {{ numberOfLikesChristmas2 }}</button>
-        </div>
-         <div class="christmas3">
-          <img src="/static/images/christmas3.jpg">
-          <button v-on:click="likeChristmas3()" type="button">♥ {{ numberOfLikesChristmas3 }}</button>
-        </div>
-        <div class="vonnie1">
-          <img src="/static/images/vonnie1.jpg">
-          <button v-on:click="likeVonnie1()" type="button">♥ {{ numberOfLikesVonnie1 }}</button>
-        </div>
-        <div class="vonnie2">
-          <img src="/static/images/vonnie2.jpg">
-          <button v-on:click="likeVonnie2()" type="button">♥ {{ numberOfLikesVonnie2 }}</button>
-        </div>
-        <div class="vonnie3">
-          <img src="/static/images/vonnie3.jpg">
-          <button v-on:click="likeVonnie3()" type="button">♥ {{ numberOfLikesVonnie3 }}</button>
-        </div>
-        <div class="ellisisland">
-          <img src="/static/images/ellisisland.jpg">
-          <button v-on:click="likeEllisisland()" type="button">♥ {{ numberOfLikesEllisisland }}</button>
-        </div>
-        <div class="green">
-          <img src="/static/images/green.jpg">
-          <button v-on:click="likeGreen()" type="button">♥ {{ numberOfLikesGreen }}</button>
-        </div>
-        <div class="cathedral">
-          <img src="/static/images/cathedral.jpg">
-          <button v-on:click="likeCathedral()" type="button">♥ {{ numberOfLikesCathedral }}</button>
-        </div>
-        <div class="vonniev">
-          <img src="/static/images/vonniev.jpg">
-          <button v-on:click="likeVonniev()" type="button">♥ {{ numberOfLikesVonniev }}</button>
-        </div>
-      </div>
+    <div id="app">
 
-      <div id="app">
+    <div class="photographs">
+      <div v-for="photo in photos">
+        <img v-bind:src="photo.path">
+          <button v-on:click="like(photo)" type="button">♥ {{ photo.likes }}</button>
+      </div>
+    </div>
+
   <h2>Comments</h2>
-    <form v-on:submit.prevent="addTicket(ticket)">
+    <form v-on:submit.prevent="addPhotoTicket()">
       <textarea v-model="addedProblem" placeholder="Share Your Thoughts On My Photographs"></textarea>
       <input v-model="addedName" placeholder="Name"></input>
       <button class="submit" type="submit">Submit</button>
     </form>
-      <div v-for="ticket in tickets">
+      <div v-for="photoTicket in photoTickets">
         <hr>
           <div class="ticket">
             <div class="problem">
-              <p>{{ticket.problem}}</p>
-              <p><i>— {{ticket.name}}</i></p>
+              <p>{{photoTicket.problem}}  — {{photoTicket.name}}</p>
             </div>
           <div class="delete">
-          <button v-on:click="deleteTicket(ticket)" class="delete">Delete</button>
+          <button v-on:click="deletePhotoTicket(photoTicket)" class="delete">Delete</button>
         </div>
       </div>
     </div>
@@ -99,105 +47,97 @@
      return {
        name: 'Photography',
        likes: [],
-       numberOfLikesItsaboy: 0,
-       numberOfLikesPortia: 0,
-       numberOfLikesChristmas1: 0,
-       numberOfLikesChristmas2: 0,
-       numberOfLikesChristmas3: 0,
-       numberOfLikesVonnie1: 0,
-       numberOfLikesVonnie2: 0,
-       numberOfLikesVonnie3: 0,
-       numberOfLikesEllisisland: 0,
-       numberOfLikesGreen: 0,
-       numberOfLikesCathedral: 0,
-       numberOfLikesVonniev: 0,
+       photos: [
+          {id: 0, path: '../static/images/itsaboy.jpg', likes: 0},
+          {id: 1, path: '../static/images/portia.jpg', likes: 0},
+          {id: 2, path: '../static/images/christmas1.jpg', likes: 0},
+          {id: 3, path: '../static/images/christmas2.jpg', likes: 0},
+          {id: 4, path: '../static/images/christmas3.jpg', likes: 0},
+          {id: 5, path: '../static/images/vonnie1.jpg', likes: 0},
+          {id: 6, path: '../static/images/vonnie2.jpg', likes: 0},
+          {id: 7, path: '../static/images/vonnie3.jpg', likes: 0},
+          {id: 8, path: '../static/images/ellisisland.jpg', likes: 0},
+          {id: 9, path: '../static/images/green.jpg', likes: 0},
+          {id: 10, path: '../static/images/cathedral.jpg', likes: 0},
+          {id: 11, path: '../static/images/vonniev.jpg', likes: 0},
+       ],
        addedName: '',
        addedProblem: '',
-       tickets: {},
+       photoTickets: {},
        }
      },
   created: function() {
-    this.getTickets();
+    this.getPhotoTicket();
   },
+  // created: function() {
+  //   this.getPhotos();
+  // },
+
   methods: {
-    getTickets: function() {
-      axios.get("http://localhost:3000/api/tickets").then(response => {
-      this.tickets = response.data;
+    getPhotoTicket: function() {
+      axios.get("/api/photoTickets").then(response => {
+      this.photoTickets = response.data;
       return true;
       }).catch(err => {
       });
     },
-    addTicket: function() {
-      axios.post("http://localhost:3000/api/tickets", {
+    addPhotoTicket: function() {
+      axios.post("/api/photoTickets", {
       name: this.addedName,
       problem: this.addedProblem
       }).then(response => {
       this.addedName = "";
       this.addedProblem = "";
-      this.getTickets();
+      this.getPhotoTicket();
       return true;
       }).catch(err => {
       });
     },
-    deleteTicket: function(ticket) {
-      axios.delete("http://localhost:3000/api/tickets/" + ticket.id).then(response => {
-      this.getTickets();
+    deletePhotoTicket: function(ticket) {
+      axios.delete("/api/photoTickets/" + ticket.id).then(response => {
+      this.getPhotoTicket();
       return true;
       }).catch(err => {
       });
     },
+    // getPhotos: function() {
+    //     axios.get("api/paintings/").then(response => {
+    //     this.paintings = response.data;
+    //     return true;
+    //     }).catch(err => {
+    //     });
+    //   }
+    // like: function(photo) {
+    //     photo.likes += 1;
+    // },
+    like: function(photo) {
+      photo.likes += 1;
+        axios.put("/api/photos/" + photo.id, {
+        
+      }).then(response => {
+        return true;
+      }).catch(err => {
+      });
+    },
+   },
+  };
 
-
-   // created: {
-    // for (let i = 1; i < 13; i++) {
-    //   likes[i] = 0;
-   //  }
-   // }
-   // methods: {
-   //  like: function (index) {
-   //    likes[index] += 1;
-   //  },
-    likeItsaboy: function () {
-      this.numberOfLikesItsaboy += 1;
-    },
-    likePortia: function () {
-      this.numberOfLikesPortia += 1;
-    },
-    likeChristmas1: function () {
-      this.numberOfLikesChristmas1 += 1;
-    },
-    likeChristmas2: function () {
-      this.numberOfLikesChristmas2 += 1;
-    },
-    likeChristmas3: function () {
-      this.numberOfLikesChristmas3 += 1;
-    },
-    likeVonnie1: function () {
-      this.numberOfLikesVonnie1 += 1;
-    },
-    likeVonnie2: function () {
-      this.numberOfLikesVonnie2 += 1;
-    },
-    likeVonnie3: function () {
-      this.numberOfLikesVonnie3 += 1;
-    },
-    likeEllisisland: function () {
-      this.numberOfLikesEllisisland += 1;
-    },
-    likeGreen: function () {
-      this.numberOfLikesGreen += 1;
-    },
-    likeCathedral: function () {
-      this.numberOfLikesCathedral += 1;
-    },
-    likeVonniev: function () {
-      this.numberOfLikesVonniev += 1;
-    },
-  }
- };
 </script>
 
 <style scoped>
+.ticket {
+  padding-bottom: 5vw;
+}
+hr {
+    height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(0, 0, 0, 0.5);
+}
+p {
+  font-family: 'Bad Script', sans-serif;
+  font-size:calc(12px + 2vw);
+  padding: 3vw 10vw 3vw 10vw;
+}
 h2 {
   font-size:calc(40px + 1vw);
   font-family: 'Meddon', cursive;
@@ -221,9 +161,9 @@ input {
 textarea {
   padding: 2vw;
   width: 50vw;
-  height:calc(80px + 10vw);
+  height:calc(70px + 5vw);
   font-family: 'Julius Sans One', sans-serif;
-  font-size:calc(12px + 1vw);
+  font-size:calc(12px + 0.9vw);
   color: black;
   font-weight: lighter;
   vertical-align: center;
@@ -251,6 +191,7 @@ button {
   opacity: 0.7;
   border: none;
   background: none;
+  font-family: 'Julius Sans One', sans-serif;
 }
 button:hover {
   opacity: 1;
@@ -264,7 +205,7 @@ button:hover {
  }
 .page {
     background-color: #F0F0F0;
-    padding-bottom: 1vw;
+    padding-bottom: 5vw;
     box-shadow: 0vw 1vw 3vw black;
     margin-bottom: 0;
   }
@@ -367,7 +308,7 @@ button:hover {
     width: 94.6vw;
     }
     .cathedral img {
-    height: 69vw;
+    height: 100vw;
     }
   
 </style>

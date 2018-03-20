@@ -3,7 +3,7 @@
     <h1>About Me</h1>
       <img src="/static/images/me.jpg">
     <div class="container">
-      <h2>Ever since I was a little girl, I was facinated with art.  It was always my favorite class at school, as I loved to see and create beauty.  Now, as a <!-- photographer,  -->painter and writer, I get to live this passion everyday.  Sarah Adeline Artistry is a collection of some of my finest work.  If you find that you connect with my work and would like to join with me for a project, please reach out to me.  I would love to hear from you!</h2>
+      <h2>Ever since I was a little girl, I was facinated with art.  It was always my favorite class at school, as I loved to see and create beauty.  Now, as a painter, photographer, and writer, I get to live this passion everyday.  Sarah Adeline Artistry is a collection of some of my finest work.  If you find that you connect with my work and would like to join with me for a project, please reach out to me.  I would love to hear from you!</h2>
     </div>
     
   </div>
@@ -50,7 +50,7 @@ body {
  h2 {
     font-family: 'Bad Script', cursive;
     font-weight: lighter;
-    font-size:calc(12px + 1.5vw);
+    font-size:calc(12px + 1.4vw);
  }
  img {
      width: 100%;
