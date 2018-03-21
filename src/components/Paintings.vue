@@ -163,7 +163,7 @@ h2 {
 }
 input {
   padding: 2vw;
-  width:calc(80px + 40vw);
+  width: 50vw;
   font-family: 'Julius Sans One', sans-serif;
   font-size:calc(12px + 1vw);
   color: black;
@@ -175,7 +175,7 @@ input {
 }
 textarea {
   padding: 2vw;
-  width:calc(80px + 40vw);
+  width: 50vw;
   height:calc(70px + 5vw);
   font-family: 'Julius Sans One', sans-serif;
   font-size:calc(12px + 0.9vw);
@@ -187,15 +187,15 @@ textarea {
   box-shadow: 0.5vw 0.5vw 0.5vw grey;
 }
 .submit {
-  padding: 2vw 0 2vw 0;
+  padding: 2vw;
   font-family: 'Julius Sans One', sans-serif;
   font-size:calc(12px + 1vw);
-  width:calc(80px + 40vw);
+  width: 53.9vw;
   color: white;
   font-weight: bold;
   vertical-align: center;
   background-color:  #e3af35;
-  margin: 2vw;
+  margin: 1vw;
   margin-bottom: 8vw;
   border: 0;
   box-shadow: 0.5vw 0.5vw 0.5vw grey;
