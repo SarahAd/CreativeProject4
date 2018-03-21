@@ -67,7 +67,7 @@
     // },
     methods: {
       getPaintingTicket: function() {
-        axios.get("/api/paintingTickets").then(response => {
+        axios.get("http://localhost:3000/api/paintingTickets").then(response => {
         this.paintingTickets = response.data;
         return true;
         }).catch(err => {
@@ -155,7 +155,7 @@ p {
   padding: 0 10vw 0 10vw;
 }
 h2 {
-  font-size:calc(40px + 1vw);
+  font-size:calc(20px + 3vw);
   font-family: 'Meddon', cursive;
   line-height: 50%;
   padding-top: 5vw;
@@ -163,7 +163,7 @@ h2 {
 }
 input {
   padding: 2vw;
-  width: 50vw;
+  width:calc(80px + 40vw);
   font-family: 'Julius Sans One', sans-serif;
   font-size:calc(12px + 1vw);
   color: black;
@@ -175,7 +175,7 @@ input {
 }
 textarea {
   padding: 2vw;
-  width: 50vw;
+  width:calc(80px + 40vw);
   height:calc(70px + 5vw);
   font-family: 'Julius Sans One', sans-serif;
   font-size:calc(12px + 0.9vw);
@@ -187,15 +187,15 @@ textarea {
   box-shadow: 0.5vw 0.5vw 0.5vw grey;
 }
 .submit {
-  padding: 2vw;
+  padding: 2vw 0 2vw 0;
   font-family: 'Julius Sans One', sans-serif;
   font-size:calc(12px + 1vw);
-  width: 53.9vw;
+  width:calc(80px + 40vw);
   color: white;
   font-weight: bold;
   vertical-align: center;
   background-color:  #e3af35;
-  margin: 1vw;
+  margin: 2vw;
   margin-bottom: 8vw;
   border: 0;
   box-shadow: 0.5vw 0.5vw 0.5vw grey;
