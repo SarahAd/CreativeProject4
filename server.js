@@ -141,7 +141,6 @@ app.put('/api/paintings/:id', (req, res) => {
   
   res.send(painting);
   console.log(painting);
-});
-
+})
 
 app.listen(3001, () => console.log('Server listening on port 3001!'))
