@@ -67,7 +67,7 @@
     // },
     methods: {
       getPaintingTicket: function() {
-        axios.get("http://localhost:3000/api/paintingTickets").then(response => {
+        axios.get("/api/paintingTickets").then(response => {
         this.paintingTickets = response.data;
         return true;
         }).catch(err => {
